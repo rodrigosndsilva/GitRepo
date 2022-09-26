@@ -3,14 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.rodrigosnds.gitrepo">
 
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".common.GitRepoApplication"
-=======
-    <application
->>>>>>> main
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,27 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GitRepo"
-<<<<<<< HEAD
-        tools:targetApi="33">
-        <activity
-            android:name=".ui.MainActivity"
-=======
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
->>>>>>> main
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.GitRepo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-<<<<<<< HEAD
-=======
-
->>>>>>> main
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
