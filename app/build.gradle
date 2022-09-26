@@ -2,16 +2,12 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
+
     compileSdk 33
-}
-
-android {
-    compileSdk 32
-
     defaultConfig {
         applicationId "com.rodrigosnds.gitrepo"
         minSdk 21
