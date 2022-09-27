@@ -16,5 +16,5 @@ interface GitRepoApi {
     ): ListRepository
 
     @GET("users/{users}/repos")
-    suspend fun getListOfUsers(@Path("users") users: String): ListRepository
+    suspend fun getListOfUsers(@Path("users") users: String): List<Repository>
 }
