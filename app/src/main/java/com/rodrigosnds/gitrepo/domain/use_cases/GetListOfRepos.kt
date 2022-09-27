@@ -1,6 +1,5 @@
 package com.rodrigosnds.gitrepo.domain.use_cases
 
-import android.util.Log
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.data.repository.GitRepoRepository
 import com.rodrigosnds.gitrepo.domain.model.Repository
@@ -22,7 +21,7 @@ class GetListOfRepos @Inject constructor(
         try {
             emit(Resource.Loading<List<Repository>>())
             val repoList = repository.getListOfRepos(name, sort, order)
-            emit(Resource.Success<List<Repository>>(repoList))
+            emit(Resource.Success<List<Repository>>(repoList.repositoryList))
         } catch (e: HttpException) {
             emit(
                 Resource.Error<List<Repository>>(

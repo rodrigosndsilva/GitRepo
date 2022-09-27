@@ -1,5 +1,6 @@
 package com.rodrigosnds.gitrepo.data.remote
 
+import com.rodrigosnds.gitrepo.domain.model.ListRepository
 import com.rodrigosnds.gitrepo.domain.model.Repository
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,8 +13,8 @@ interface GitRepoApi {
         @Query("q") name: String,
         @Query("sort") sort: String,
         @Query("order") order: String
-    ): List<Repository>
+    ): ListRepository
 
     @GET("users/{users}/repos")
-    suspend fun getListOfUsers(@Path("users") users: String): List<Repository>
+    suspend fun getListOfUsers(@Path("users") users: String): ListRepository
 }

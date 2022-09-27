@@ -20,7 +20,7 @@ class GetListOfUsers @Inject constructor(
             try {
                 emit(Resource.Loading<List<Repository>>())
                 val usersList = repository.getListOfUsers(user)
-                emit(Resource.Success<List<Repository>>(usersList))
+                emit(Resource.Success<List<Repository>>(usersList.repositoryList))
             } catch (e: HttpException) {
                 emit(
                     Resource.Error<List<Repository>>(

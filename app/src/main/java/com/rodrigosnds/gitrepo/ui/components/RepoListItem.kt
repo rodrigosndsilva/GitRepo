@@ -8,12 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.domain.model.Repository
 
@@ -30,13 +27,24 @@ fun RepoListItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = "${repo.name})",
+            text = "${repo.name}",
+            style = MaterialTheme.typography.body1,
+            overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = "${repo.description}",
+            style = MaterialTheme.typography.body1,
+            overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = "${repo.watchersCount}",
             style = MaterialTheme.typography.body1,
             overflow = TextOverflow.Ellipsis
         )
     }
-
 }
+
+
 
 
 
