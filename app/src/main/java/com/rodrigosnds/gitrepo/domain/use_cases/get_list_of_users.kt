@@ -18,17 +18,17 @@ class get_list_of_users @Inject constructor(
     ): Flow<Resource<List<Repository>>> =
         flow {
             try {
-                emit(Resource.Loading())
+                emit(Resource.Loading<List<Repository>>())
                 val usersList = repository.getListOfUsers(user)
-                emit(Resource.Success(usersList))
+                emit(Resource.Success<List<Repository>>(usersList))
             } catch (e: HttpException) {
                 emit(
-                    Resource.Error(
+                    Resource.Error<List<Repository>>(
                         e.localizedMessage ?: "An unexpected error occurred"
                     )
                 )
             } catch (e: IOException) {
-                emit(Resource.Error("Couldn't reach server. Check your internet connection"))
+                emit(Resource.Error<List<Repository>>("Couldn't reach server. Check your internet connection"))
             }
 
         }
