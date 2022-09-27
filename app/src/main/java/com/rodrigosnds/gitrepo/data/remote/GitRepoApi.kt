@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface GitRepoApi {
     @GET("search/repositories")
     suspend fun getListOfRepos(
-        @Query("q") query: String,
+        @Query("q") name: String,
         @Query("sort") sort: String,
         @Query("order") order: String
     ): List<Repository>

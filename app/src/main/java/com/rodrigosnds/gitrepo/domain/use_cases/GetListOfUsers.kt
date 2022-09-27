@@ -10,7 +10,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class get_list_of_users @Inject constructor(
+class GetListOfUsers @Inject constructor(
     private val repository: GitRepoRepository
 ) {
     operator fun invoke(

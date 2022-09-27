@@ -7,8 +7,8 @@ import javax.inject.Inject
 class GitRepoRepository @Inject constructor(
     private val api: GitRepoApi
 ) {
-    suspend fun getListOfRepos(query: String, sort: String, order: String): List<Repository> {
-        return api.getListOfRepos(query, sort, order)
+    suspend fun getListOfRepos(name: String, sort: String, order: String): List<Repository> {
+        return api.getListOfRepos(name, sort, order)
     }
 
     suspend fun getListOfUsers(user: String): List<Repository> {
