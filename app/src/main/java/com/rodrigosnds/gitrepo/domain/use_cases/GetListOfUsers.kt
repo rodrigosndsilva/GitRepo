@@ -2,6 +2,7 @@ package com.rodrigosnds.gitrepo.domain.use_cases
 
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.data.repository.GitRepoRepository
+import com.rodrigosnds.gitrepo.domain.model.ListRepository
 import com.rodrigosnds.gitrepo.domain.model.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,12 +16,11 @@ class GetListOfUsers @Inject constructor(
 ) {
     operator fun invoke(
         user: String
-    ): Flow<Resource<List<Repository>>> =
-        flow {
+    ): Flow<Resource<List<Repository>>> = flow {
             try {
                 emit(Resource.Loading<List<Repository>>())
                 val usersList = repository.getListOfUsers(user)
-                emit(Resource.Success<List<Repository>>(usersList.repositoryList))
+                emit(Resource.Success<List<Repository>>(usersList))
             } catch (e: HttpException) {
                 emit(
                     Resource.Error<List<Repository>>(

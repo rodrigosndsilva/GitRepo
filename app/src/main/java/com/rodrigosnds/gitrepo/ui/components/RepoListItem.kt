@@ -22,25 +22,10 @@ fun RepoListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
-            .padding(20.dp),
+            .clickable { },
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
-            text = "${repo.name}",
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis
-        )
-        Text(
-            text = "${repo.description}",
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis
-        )
-        Text(
-            text = "${repo.watchersCount}",
-            style = MaterialTheme.typography.body1,
-            overflow = TextOverflow.Ellipsis
-        )
+        CardRepo(repo = repo)
     }
 }
 

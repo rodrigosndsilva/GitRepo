@@ -12,7 +12,7 @@ class GitRepoRepository @Inject constructor(
         return api.getListOfRepos(name, sort, order)
     }
 
-    suspend fun getListOfUsers(user: String): ListRepository {
+    suspend fun getListOfUsers(user: String): List<Repository> {
         return api.getListOfUsers(user)
     }
 }
