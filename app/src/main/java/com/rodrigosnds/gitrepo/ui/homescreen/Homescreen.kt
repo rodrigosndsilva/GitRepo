@@ -3,7 +3,6 @@ package com.rodrigosnds.gitrepo.ui.homescreen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -13,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.rodrigosnds.gitrepo.ui.components.RepoListItem
 import com.rodrigosnds.gitrepo.ui.components.UserRepoNavbar
 
@@ -23,8 +21,7 @@ fun Homescreen(
     viewModel: HomescreenViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
-    Column() {
-        Button(onClick = { /*TODO*/ }) {}
+    Column {
         UserRepoNavbar(viewModel)
         Box(modifier = Modifier.fillMaxSize()) {
             LazyColumn(modifier = Modifier.fillMaxSize()) {

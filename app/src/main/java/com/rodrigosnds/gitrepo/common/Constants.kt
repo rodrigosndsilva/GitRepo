@@ -5,5 +5,8 @@ object Constants {
     const val PARAM_NAME = "created"
     const val PARAM_SORT = "stars"
     const val PARAM_ORDER = "desc"
+    const val REPO_NAME = "Enter a Repository name"
+    const val USER_NAME = "Enter a User name"
+
 
 }
