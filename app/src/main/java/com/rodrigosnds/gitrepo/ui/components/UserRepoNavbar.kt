@@ -28,9 +28,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     end = 20.dp,
                     bottom = 12.dp
                 )
-                .align(alignment = Alignment.CenterHorizontally),
-
-            ) {
+        ) {
             OutlinedTextField(
                 modifier = Modifier
                     .width(280.dp),
@@ -42,8 +40,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
             )
             Spacer(modifier = Modifier.padding(10.dp))
             Button(modifier = Modifier
-                .width(55.dp)
-                .height(45.dp),
+                .align(alignment = Alignment.CenterVertically),
                 onClick = {
                     if (selectedUsers.value)
                         viewModel.getListUsers(text)
