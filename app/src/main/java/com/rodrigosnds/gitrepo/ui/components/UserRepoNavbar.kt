@@ -72,7 +72,8 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     bottom = 12.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selectedUsers.value) Color.Blue else Color.Gray
+                    backgroundColor = if (selectedUsers.value) Color.Blue else Color.Gray,
+                    contentColor = Color.White
                 ),
                 onClick = {
                     if (!selectedUsers.value) {
@@ -82,7 +83,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     inputLabelText = Constants.USER_NAME
                 })
             {
-                Text(text = "Users")
+                Text(text = Constants.BUTTON_USER_NAME)
             }
 
             Spacer(modifier = Modifier.padding(5.dp))
@@ -96,7 +97,8 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     bottom = 12.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selectedRepos.value) Color.Blue else Color.Gray
+                    backgroundColor = if (selectedRepos.value) Color.Blue else Color.Gray,
+                    contentColor = Color.White
                 ),
                 onClick = {
                     if (!selectedRepos.value) {
@@ -105,7 +107,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     }
                     inputLabelText = Constants.REPO_NAME
                 }) {
-                Text(text = "Repos")
+                Text(text = Constants.BUTTON_REPO_NAME)
             }
         }
     }
