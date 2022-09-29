@@ -12,12 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.rodrigosnds.gitrepo.domain.model.Repository
 import com.rodrigosnds.gitrepo.ui.components.RepoListItem
 import com.rodrigosnds.gitrepo.ui.components.UserRepoNavbar
+import com.rodrigosnds.gitrepo.ui.destinations.RepoDetailsDestination
 
+@Destination(start = true)
 @Composable
 fun Homescreen(
-    //navController: NavController,
+    navigator: DestinationsNavigator,
     viewModel: HomescreenViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
@@ -29,9 +34,11 @@ fun Homescreen(
                     RepoListItem(
                         repo = repo,
                         onItemClick = {
+                            navigator.navigate(
+                                RepoDetailsDestination()
+                            )
                         }
                     )
-
                 }
             }
             if (state.error.isNotBlank()) {

@@ -3,9 +3,10 @@ package com.rodrigosnds.gitrepo.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.rodrigosnds.gitrepo.ui.homescreen.Homescreen
+import com.ramcosta.composedestinations.DestinationsNavHost
 import com.rodrigosnds.gitrepo.ui.theme.GitRepoTheme
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -13,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GitRepoTheme {
-                Homescreen()
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
     }

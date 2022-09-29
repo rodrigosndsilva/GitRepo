@@ -1,13 +1,11 @@
 package com.rodrigosnds.gitrepo.ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -17,16 +15,20 @@ import com.rodrigosnds.gitrepo.domain.model.Repository
 
 
 @Composable
-fun CardRepo(repo: Repository) {
-    Card ( modifier = Modifier
-        .fillMaxWidth()
-        .padding(15.dp)
-        .clickable { },
-        elevation = 10.dp)
+fun CardRepo(
+    repo: Repository,
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(15.dp),
+        elevation = 10.dp
+    )
     {
-        Box(modifier = Modifier
-            .padding(15.dp)
-            .padding(top = 10.dp, bottom = 10.dp)
+        Box(
+            modifier = Modifier
+                .padding(15.dp)
+                .padding(top = 10.dp, bottom = 10.dp)
         ) {
             Column(
                 modifier = Modifier.padding(15.dp)
@@ -58,7 +60,7 @@ fun CardRepo(repo: Repository) {
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.description ?: "No description...",
+                        text = repo.description,
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
