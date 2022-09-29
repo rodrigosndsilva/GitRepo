@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.rodrigosnds.gitrepo.domain.model.Repository
 import com.rodrigosnds.gitrepo.ui.components.RepoListItem
 import com.rodrigosnds.gitrepo.ui.components.UserRepoNavbar
 import com.rodrigosnds.gitrepo.ui.destinations.RepoDetailsDestination

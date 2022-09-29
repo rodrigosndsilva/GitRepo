@@ -3,7 +3,6 @@ package com.rodrigosnds.gitrepo.data.repository
 import com.rodrigosnds.gitrepo.data.remote.GitRepoApi
 import com.rodrigosnds.gitrepo.domain.model.ListRepository
 import com.rodrigosnds.gitrepo.domain.model.Repository
-import com.rodrigosnds.gitrepo.domain.model.SpecificRepository
 import javax.inject.Inject
 
 class GitRepoRepository @Inject constructor(
@@ -17,7 +16,7 @@ class GitRepoRepository @Inject constructor(
         return api.getReposFromUser(user)
     }
 
-    suspend fun getRepoByID(owner: String, repo: String): SpecificRepository {
+    suspend fun getRepoByID(owner: String, repo: String): Repository {
         return api.getRepo(owner, repo)
     }
 }

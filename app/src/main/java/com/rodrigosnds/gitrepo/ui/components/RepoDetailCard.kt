@@ -8,13 +8,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rodrigosnds.gitrepo.ui.repo_details.RepoDetailsViewModel
+import com.rodrigosnds.gitrepo.domain.model.Repository
 
 @Composable
 fun RepoDetailCard(
-    viewModel: RepoDetailsViewModel,
+    repo: Repository,
 ) {
-    val state = viewModel.state.value
     Card(
         elevation = 4.dp,
         modifier = Modifier
@@ -22,7 +21,6 @@ fun RepoDetailCard(
             .height(500.dp)
             .width(500.dp)
     ) {
-        state.repoDetail?.let { Text(text = it.name) }
-
+        Text(text = repo.name)
     }
 }

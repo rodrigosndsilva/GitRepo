@@ -2,7 +2,7 @@ package com.rodrigosnds.gitrepo.domain.use_cases
 
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.data.repository.GitRepoRepository
-import com.rodrigosnds.gitrepo.domain.model.SpecificRepository
+import com.rodrigosnds.gitrepo.domain.model.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -15,19 +15,19 @@ class GetRepo @Inject constructor(
     operator fun invoke(
         owner: String,
         repo: String
-    ): Flow<Resource<SpecificRepository>> = flow {
+    ): Flow<Resource<Repository>> = flow {
         try {
-            emit(Resource.Loading<SpecificRepository>())
+            emit(Resource.Loading<Repository>())
             val repoDetail = repository.getRepoByID(owner, repo)
-            emit(Resource.Success<SpecificRepository>(repoDetail))
+            emit(Resource.Success<Repository>(repoDetail))
         } catch (e: HttpException) {
             emit(
-                Resource.Error<SpecificRepository>(
+                Resource.Error<Repository>(
                     e.localizedMessage ?: "An unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
-            emit(Resource.Error<SpecificRepository>("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error<Repository>("Couldn't reach server. Check your internet connection"))
         }
 
     }
