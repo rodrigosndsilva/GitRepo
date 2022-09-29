@@ -9,15 +9,16 @@ import retrofit2.http.Query
 
 interface GitRepoApi {
     @GET("search/repositories")
-    suspend fun getListOfRepos(
+    suspend fun  getRepos(
         @Query("q") name: String,
         @Query("sort") sort: String,
         @Query("order") order: String
     ): ListRepository
 
     @GET("users/{users}/repos")
-    suspend fun getListOfUsers(@Path("users") users: String): List<Repository>
+    suspend fun getReposFromUser(@Path("users") users: String): List<Repository>
 
-    @GET("search/repositories/{id}")
-    suspend fun getRepoByID(@Path("id") id: Int): SpecificRepository
+    @GET("/repos/{owner}/{repo}")
+    fun getRepo(@Path("owner") owner: String,
+                @Path("repo") repo: String): SpecificRepository
 }
