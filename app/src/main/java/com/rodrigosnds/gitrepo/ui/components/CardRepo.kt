@@ -60,7 +60,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.description,
+                        text = repo.description ?: "No description...",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
