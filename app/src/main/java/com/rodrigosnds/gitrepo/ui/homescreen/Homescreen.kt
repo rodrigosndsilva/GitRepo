@@ -18,7 +18,9 @@ import com.rodrigosnds.gitrepo.ui.components.RepoListItem
 import com.rodrigosnds.gitrepo.ui.components.UserRepoNavbar
 import com.rodrigosnds.gitrepo.ui.destinations.RepoDetailsDestination
 
-@Destination(start = true)
+@Destination(
+    start = true
+)
 @Composable
 fun Homescreen(
     navigator: DestinationsNavigator,
@@ -34,7 +36,8 @@ fun Homescreen(
                         repo = repo,
                         onItemClick = {
                             navigator.navigate(
-                                RepoDetailsDestination()
+                                RepoDetailsDestination(repo.owner.login, repo.name),
+                                onlyIfResumed = true
                             )
                         }
                     )

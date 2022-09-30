@@ -24,7 +24,7 @@ class HomescreenViewModel @Inject constructor(
     val state: State<RepositoryListState> = _state
 
     init {
-        getListRepos(Constants.PARAM_NAME, Constants.PARAM_SORT, Constants.PARAM_ORDER)
+        //getListRepos(Constants.PARAM_NAME, Constants.PARAM_SORT, Constants.PARAM_ORDER)
     }
 
     fun getListRepos(name: String, sort: String, order: String) {

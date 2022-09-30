@@ -1,6 +1,7 @@
 package com.rodrigosnds.gitrepo.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -22,7 +23,8 @@ fun CardRepo(
         modifier = Modifier
             .fillMaxWidth()
             .padding(15.dp),
-        elevation = 10.dp
+        shape = RoundedCornerShape(15),
+        elevation = 20.dp
     )
     {
         Box(
@@ -43,7 +45,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.name,
+                        text = repo.name ?: "No Name...",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -60,7 +62,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.description ?: "No description...",
+                        text = repo.description ?: "No Description...",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -77,7 +79,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = "${repo.stargazersCount}",
+                        text = "${repo.stargazersCount}" ?: "No Stars...",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)

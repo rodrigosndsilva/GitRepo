@@ -4,20 +4,26 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.R
 import com.rodrigosnds.gitrepo.common.Constants
 import com.rodrigosnds.gitrepo.ui.homescreen.HomescreenViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun UserRepoNavbar(viewModel: HomescreenViewModel) {
     val selectedUsers = remember { mutableStateOf(true) }
     val selectedRepos = remember { mutableStateOf(false) }
     var text by remember { mutableStateOf("") }
     var inputLabelText by remember { mutableStateOf(Constants.USER_NAME) }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
 
     Column {
         Row(
@@ -46,10 +52,12 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                         viewModel.getListUsers(text)
                     else
                         viewModel.getListRepos(
-                            text,
+                            text.trim(),
                             Constants.PARAM_SORT,
                             Constants.PARAM_ORDER
                         )
+                    keyboardController?.hide()
+                    focusManager.clearFocus()
                 })
             {
                 Icon(
