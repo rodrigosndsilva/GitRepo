@@ -1,6 +1,7 @@
 package com.rodrigosnds.gitrepo.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,10 +35,14 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     end = 20.dp,
                     bottom = 12.dp
                 )
+                .align(alignment = Alignment.CenterHorizontally)
+
         ) {
             OutlinedTextField(
                 modifier = Modifier
-                    .width(280.dp),
+                    .width(280.dp)
+                    .height(60.dp),
+                shape = RoundedCornerShape(50),
                 value = text,
                 label = { Text(text = inputLabelText) },
                 onValueChange = {
@@ -46,7 +51,9 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
             )
             Spacer(modifier = Modifier.padding(10.dp))
             Button(modifier = Modifier
+                .height(50.dp)
                 .align(alignment = Alignment.CenterVertically),
+                shape = RoundedCornerShape(100),
                 onClick = {
                     if (selectedUsers.value)
                         viewModel.getListUsers(text)
