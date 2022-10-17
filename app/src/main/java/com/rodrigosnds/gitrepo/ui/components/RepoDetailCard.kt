@@ -14,19 +14,17 @@ import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.R
 import com.rodrigosnds.gitrepo.domain.model.Repository
 
-
 @Composable
-fun CardRepo(
+fun RepoDetailCard(
     repo: Repository,
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(15.dp),
+            .height(600.dp)
+            .fillMaxWidth(),
         shape = RoundedCornerShape(15),
         elevation = 20.dp
-    )
-    {
+    ) {
         Box(
             modifier = Modifier
                 .padding(15.dp)

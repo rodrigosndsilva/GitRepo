@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.rodrigosnds.gitrepo.common.Constants
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.domain.model.Repository
-import com.rodrigosnds.gitrepo.domain.use_cases.GetListOfRepos
-import com.rodrigosnds.gitrepo.domain.use_cases.GetListOfUsers
+import com.rodrigosnds.gitrepo.domain.use_cases.GetRepos
+import com.rodrigosnds.gitrepo.domain.use_cases.GetReposFromUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomescreenViewModel @Inject constructor(
-    private val getListOfRepos: GetListOfRepos,
-    private val getListOfUsers: GetListOfUsers
+    private val getRepos: GetRepos,
+    private val getListOfUsers: GetReposFromUser
 ) : ViewModel() {
 
     private val _state = mutableStateOf(RepositoryListState())
@@ -28,7 +28,7 @@ class HomescreenViewModel @Inject constructor(
     }
 
     fun getListRepos(name: String, sort: String, order: String) {
-        getListOfRepos(name, sort, order).onEach { result ->
+        getRepos(name, sort, order).onEach { result ->
             when (result) {
                 is Resource.Success<List<Repository>> -> {
                     _state.value = RepositoryListState(repoList = result.data ?: emptyList())

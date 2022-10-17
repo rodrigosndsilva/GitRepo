@@ -1,23 +1,30 @@
 package com.rodrigosnds.gitrepo.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.R
 import com.rodrigosnds.gitrepo.common.Constants
 import com.rodrigosnds.gitrepo.ui.homescreen.HomescreenViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun UserRepoNavbar(viewModel: HomescreenViewModel) {
     val selectedUsers = remember { mutableStateOf(true) }
     val selectedRepos = remember { mutableStateOf(false) }
     var text by remember { mutableStateOf("") }
     var inputLabelText by remember { mutableStateOf(Constants.USER_NAME) }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
 
     Column {
         Row(
@@ -28,10 +35,14 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     end = 20.dp,
                     bottom = 12.dp
                 )
+                .align(alignment = Alignment.CenterHorizontally)
+
         ) {
             OutlinedTextField(
                 modifier = Modifier
-                    .width(280.dp),
+                    .width(280.dp)
+                    .height(60.dp),
+                shape = RoundedCornerShape(50),
                 value = text,
                 label = { Text(text = inputLabelText) },
                 onValueChange = {
@@ -40,16 +51,20 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
             )
             Spacer(modifier = Modifier.padding(10.dp))
             Button(modifier = Modifier
+                .height(50.dp)
                 .align(alignment = Alignment.CenterVertically),
+                shape = RoundedCornerShape(100),
                 onClick = {
                     if (selectedUsers.value)
                         viewModel.getListUsers(text)
                     else
                         viewModel.getListRepos(
-                            text,
+                            text.trim(),
                             Constants.PARAM_SORT,
                             Constants.PARAM_ORDER
                         )
+                    keyboardController?.hide()
+                    focusManager.clearFocus()
                 })
             {
                 Icon(
@@ -72,7 +87,8 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     bottom = 12.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selectedUsers.value) Color.Blue else Color.Gray
+                    backgroundColor = if (selectedUsers.value) Color.Blue else Color.Gray,
+                    contentColor = Color.White
                 ),
                 onClick = {
                     if (!selectedUsers.value) {
@@ -82,7 +98,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     inputLabelText = Constants.USER_NAME
                 })
             {
-                Text(text = "Users")
+                Text(text = Constants.BUTTON_USER_NAME)
             }
 
             Spacer(modifier = Modifier.padding(5.dp))
@@ -96,7 +112,8 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     bottom = 12.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selectedRepos.value) Color.Blue else Color.Gray
+                    backgroundColor = if (selectedRepos.value) Color.Blue else Color.Gray,
+                    contentColor = Color.White
                 ),
                 onClick = {
                     if (!selectedRepos.value) {
@@ -105,7 +122,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     }
                     inputLabelText = Constants.REPO_NAME
                 }) {
-                Text(text = "Repos")
+                Text(text = Constants.BUTTON_REPO_NAME)
             }
         }
     }
