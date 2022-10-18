@@ -15,7 +15,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun providePaprikaApi(): GitRepoApi {
+    fun gitRepoApi(): GitRepoApi {
         return Retrofit.Builder()
             .baseUrl(Constants.URL_GITHUB)
             .addConverterFactory(GsonConverterFactory.create())
@@ -25,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoinRepository(api: GitRepoApi): GitRepoRepository {
+    fun gitRepoRepository(api: GitRepoApi): GitRepoRepository {
         return GitRepoRepository(api)
     }
 }

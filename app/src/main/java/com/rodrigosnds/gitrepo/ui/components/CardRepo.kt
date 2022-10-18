@@ -45,7 +45,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.name ?: "No Name...",
+                        text = repo.name,
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -62,7 +62,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.description ?: "No Description...",
+                        text = repo.description,
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -79,7 +79,7 @@ fun CardRepo(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = "${repo.stargazersCount}" ?: "No Stars...",
+                        text = "${repo.stargazersCount}",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)

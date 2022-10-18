@@ -10,26 +10,24 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class GetRepos @Inject constructor(
+class ListUserRepos @Inject constructor(
     private val repository: GitRepoRepository
 ) {
     operator fun invoke(
-        name: String,
-        sort: String,
-        order: String
+        user: String
     ): Flow<Resource<List<Repository>>> = flow {
         try {
-            emit(Resource.Loading<List<Repository>>())
-            val repoList = repository.getRepos(name, sort, order)
-            emit(Resource.Success<List<Repository>>(repoList.repositoryList))
+            emit(Resource.Loading())
+            val usersList = repository.listUserRepos(user)
+            emit(Resource.Success(usersList))
         } catch (e: HttpException) {
             emit(
-                Resource.Error<List<Repository>>(
+                Resource.Error(
                     e.localizedMessage ?: "An unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
-            emit(Resource.Error<List<Repository>>("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error("Couldn't reach server. Check your internet connection"))
         }
 
     }

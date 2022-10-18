@@ -4,11 +4,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rodrigosnds.gitrepo.common.Constants
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.domain.model.Repository
-import com.rodrigosnds.gitrepo.domain.use_cases.GetRepos
-import com.rodrigosnds.gitrepo.domain.use_cases.GetReposFromUser
+import com.rodrigosnds.gitrepo.domain.use_cases.ListRepos
+import com.rodrigosnds.gitrepo.domain.use_cases.ListUserRepos
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -16,19 +15,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomescreenViewModel @Inject constructor(
-    private val getRepos: GetRepos,
-    private val getListOfUsers: GetReposFromUser
+    private val listRepos: ListRepos,
+    private val listUserRepos: ListUserRepos
 ) : ViewModel() {
 
     private val _state = mutableStateOf(RepositoryListState())
     val state: State<RepositoryListState> = _state
 
-    init {
-        //getListRepos(Constants.PARAM_NAME, Constants.PARAM_SORT, Constants.PARAM_ORDER)
-    }
-
     fun getListRepos(name: String, sort: String, order: String) {
-        getRepos(name, sort, order).onEach { result ->
+        listRepos(name, sort, order).onEach { result ->
             when (result) {
                 is Resource.Success<List<Repository>> -> {
                     _state.value = RepositoryListState(repoList = result.data ?: emptyList())
@@ -47,7 +42,7 @@ class HomescreenViewModel @Inject constructor(
     }
 
     fun getListUsers(user: String) {
-        getListOfUsers(user).onEach { result ->
+        listUserRepos(user).onEach { result ->
             when (result) {
                 is Resource.Success<List<Repository>> -> {
                     _state.value = RepositoryListState(repoList = result.data ?: emptyList())

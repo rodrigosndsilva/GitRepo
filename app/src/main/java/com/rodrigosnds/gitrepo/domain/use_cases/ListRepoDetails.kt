@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetRepo @Inject constructor(
+class ListRepoDetails @Inject constructor(
     private val repository: GitRepoRepository
 ) {
     operator fun invoke(
@@ -17,17 +17,17 @@ class GetRepo @Inject constructor(
         repo: String
     ): Flow<Resource<Repository>> = flow {
         try {
-            emit(Resource.Loading<Repository>())
-            val repoDetail = repository.getRepoByID(owner, repo)
-            emit(Resource.Success<Repository>(repoDetail))
+            emit(Resource.Loading())
+            val repoDetail = repository.listRepoDetails(owner, repo)
+            emit(Resource.Success(repoDetail))
         } catch (e: HttpException) {
             emit(
-                Resource.Error<Repository>(
+                Resource.Error(
                     e.localizedMessage ?: "An unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
-            emit(Resource.Error<Repository>("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error("Couldn't reach server. Check your internet connection"))
         }
 
     }

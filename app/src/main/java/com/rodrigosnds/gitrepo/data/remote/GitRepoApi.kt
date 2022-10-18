@@ -8,17 +8,17 @@ import retrofit2.http.Query
 
 interface GitRepoApi {
     @GET("search/repositories")
-    suspend fun getRepos(
+    suspend fun listRepos(
         @Query("q") name: String,
         @Query("sort") sort: String,
         @Query("order") order: String
     ): ListRepository
 
     @GET("users/{users}/repos")
-    suspend fun getReposFromUser(@Path("users") users: String): List<Repository>
+    suspend fun listUserRepos(@Path("users") users: String): List<Repository>
 
     @GET("/repos/{owner}/{repo}")
-    suspend fun getRepo(
+    suspend fun listRepoDetails(
         @Path("owner") owner: String,
         @Path("repo") repo: String
     ): Repository

@@ -8,15 +8,15 @@ import javax.inject.Inject
 class GitRepoRepository @Inject constructor(
     private val api: GitRepoApi
 ) {
-    suspend fun getRepos(name: String, sort: String, order: String): ListRepository {
-        return api.getRepos(name, sort, order)
+    suspend fun listRepos(name: String, sort: String, order: String): ListRepository {
+        return api.listRepos(name, sort, order)
     }
 
-    suspend fun getReposFromUser(user: String): List<Repository> {
-        return api.getReposFromUser(user)
+    suspend fun listUserRepos(user: String): List<Repository> {
+        return api.listUserRepos(user)
     }
 
-    suspend fun getRepoByID(owner: String, repo: String): Repository {
-        return api.getRepo(owner, repo)
+    suspend fun listRepoDetails(owner: String, repo: String): Repository {
+        return api.listRepoDetails(owner, repo)
     }
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.domain.model.Repository
-import com.rodrigosnds.gitrepo.domain.use_cases.GetRepo
+import com.rodrigosnds.gitrepo.domain.use_cases.ListRepoDetails
 import com.rodrigosnds.gitrepo.ui.destinations.RepoDetailsDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RepoDetailsViewModel @Inject constructor(
-    private val getRepo: GetRepo,
+    private val listRepoDetails: ListRepoDetails,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -25,11 +25,11 @@ class RepoDetailsViewModel @Inject constructor(
 
     init {
         val navArgs: RepoDetailsNavArgs = RepoDetailsDestination.argsFrom(savedStateHandle)
-        getRepoDetails(navArgs.repoOwner, navArgs.repoName)
+        getListRepoDetails(navArgs.repoOwner, navArgs.repoName)
     }
 
-    private fun getRepoDetails(owner: String, repo: String) {
-        getRepo(owner, repo).onEach { result ->
+    private fun getListRepoDetails(owner: String, repo: String) {
+        listRepoDetails(owner, repo).onEach { result ->
             when (result) {
                 is Resource.Success<Repository> -> {
                     _state.value = RepositoryDetailsState(repoDetail = result.data)
