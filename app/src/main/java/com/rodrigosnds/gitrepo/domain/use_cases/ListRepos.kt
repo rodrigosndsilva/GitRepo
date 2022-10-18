@@ -21,15 +21,15 @@ class ListRepos @Inject constructor(
         try {
             emit(Resource.Loading())
             val repoList = repository.listRepos(name, sort, order)
-            emit(Resource.Success<List<Repository>>(repoList.repositoryList))
+            emit(Resource.Success(repoList.repositoryList))
         } catch (e: HttpException) {
             emit(
-                Resource.Error<List<Repository>>(
+                Resource.Error(
                     e.localizedMessage ?: "An unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
-            emit(Resource.Error<List<Repository>>("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error("Couldn't reach server. Check your internet connection"))
         }
 
     }

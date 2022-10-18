@@ -17,17 +17,17 @@ class ListRepoDetails @Inject constructor(
         repo: String
     ): Flow<Resource<Repository>> = flow {
         try {
-            emit(Resource.Loading<Repository>())
+            emit(Resource.Loading())
             val repoDetail = repository.listRepoDetails(owner, repo)
             emit(Resource.Success(repoDetail))
         } catch (e: HttpException) {
             emit(
-                Resource.Error<Repository>(
+                Resource.Error(
                     e.localizedMessage ?: "An unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
-            emit(Resource.Error<Repository>("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error("Couldn't reach server. Check your internet connection"))
         }
 
     }

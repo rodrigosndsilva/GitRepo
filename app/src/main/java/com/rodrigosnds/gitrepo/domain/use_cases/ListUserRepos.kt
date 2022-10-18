@@ -16,19 +16,19 @@ class ListUserRepos @Inject constructor(
     operator fun invoke(
         user: String
     ): Flow<Resource<List<Repository>>> = flow {
-            try {
-                emit(Resource.Loading<List<Repository>>())
-                val usersList = repository.listUserRepos(user)
-                emit(Resource.Success<List<Repository>>(usersList))
-            } catch (e: HttpException) {
-                emit(
-                    Resource.Error<List<Repository>>(
-                        e.localizedMessage ?: "An unexpected error occurred"
-                    )
+        try {
+            emit(Resource.Loading())
+            val usersList = repository.listUserRepos(user)
+            emit(Resource.Success(usersList))
+        } catch (e: HttpException) {
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: "An unexpected error occurred"
                 )
-            } catch (e: IOException) {
-                emit(Resource.Error<List<Repository>>("Couldn't reach server. Check your internet connection"))
-            }
-
+            )
+        } catch (e: IOException) {
+            emit(Resource.Error("Couldn't reach server. Check your internet connection"))
         }
+
+    }
 }
