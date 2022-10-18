@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rodrigosnds.gitrepo.common.Constants
 import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.domain.model.Repository
 import com.rodrigosnds.gitrepo.domain.use_cases.ListRepos
@@ -22,10 +21,6 @@ class HomescreenViewModel @Inject constructor(
 
     private val _state = mutableStateOf(RepositoryListState())
     val state: State<RepositoryListState> = _state
-
-    init {
-        //getListRepos("created", Constants.PARAM_SORT, Constants.PARAM_ORDER)
-    }
 
     fun getListRepos(name: String, sort: String, order: String) {
         listRepos(name, sort, order).onEach { result ->
