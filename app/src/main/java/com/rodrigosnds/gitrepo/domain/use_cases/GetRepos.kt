@@ -10,7 +10,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class GetListOfRepos @Inject constructor(
+class GetRepos @Inject constructor(
     private val repository: GitRepoRepository
 ) {
     operator fun invoke(
@@ -20,7 +20,7 @@ class GetListOfRepos @Inject constructor(
     ): Flow<Resource<List<Repository>>> = flow {
         try {
             emit(Resource.Loading<List<Repository>>())
-            val repoList = repository.getListOfRepos(name, sort, order)
+            val repoList = repository.getRepos(name, sort, order)
             emit(Resource.Success<List<Repository>>(repoList.repositoryList))
         } catch (e: HttpException) {
             emit(
