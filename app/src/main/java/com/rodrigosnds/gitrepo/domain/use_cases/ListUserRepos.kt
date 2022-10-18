@@ -10,7 +10,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class GetReposFromUser @Inject constructor(
+class ListUserRepos @Inject constructor(
     private val repository: GitRepoRepository
 ) {
     operator fun invoke(
@@ -18,7 +18,7 @@ class GetReposFromUser @Inject constructor(
     ): Flow<Resource<List<Repository>>> = flow {
             try {
                 emit(Resource.Loading<List<Repository>>())
-                val usersList = repository.getReposFromUser(user)
+                val usersList = repository.listUserRepos(user)
                 emit(Resource.Success<List<Repository>>(usersList))
             } catch (e: HttpException) {
                 emit(
