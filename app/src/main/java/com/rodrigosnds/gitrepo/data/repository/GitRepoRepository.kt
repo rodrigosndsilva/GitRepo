@@ -1,8 +1,10 @@
 package com.rodrigosnds.gitrepo.data.repository
 
+import com.rodrigosnds.gitrepo.common.Resource
 import com.rodrigosnds.gitrepo.data.remote.GitRepoApi
 import com.rodrigosnds.gitrepo.domain.model.ListRepository
 import com.rodrigosnds.gitrepo.domain.model.Repository
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class GitRepoRepository @Inject constructor(
@@ -19,4 +21,5 @@ class GitRepoRepository @Inject constructor(
     suspend fun listRepoDetails(owner: String, repo: String): Repository {
         return api.listRepoDetails(owner, repo)
     }
+
 }

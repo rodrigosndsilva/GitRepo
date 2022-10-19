@@ -7,6 +7,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -20,7 +22,7 @@ fun RepoDetailCard(
 ) {
     Card(
         modifier = Modifier
-            .height(600.dp)
+            .wrapContentWidth(CenterHorizontally)
             .fillMaxWidth(),
         shape = RoundedCornerShape(15),
         elevation = 20.dp
@@ -60,7 +62,7 @@ fun RepoDetailCard(
                         contentDescription = null // decorative element
                     )
                     Text(
-                        text = repo.description,
+                        text = repo.description ?: "No Description",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)

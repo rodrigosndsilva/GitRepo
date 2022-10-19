@@ -50,7 +50,6 @@ fun Homescreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp)
                         .align(Alignment.Center)
                 )
             }

@@ -21,7 +21,6 @@ import com.rodrigosnds.gitrepo.ui.destinations.HomescreenDestination
 
 @Destination(
     navArgsDelegate = RepoDetailsNavArgs::class
-
 )
 @Composable
 fun RepoDetails(
