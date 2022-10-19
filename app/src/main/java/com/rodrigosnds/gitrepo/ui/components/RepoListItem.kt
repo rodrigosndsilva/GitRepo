@@ -19,9 +19,7 @@ fun RepoListItem(
             .clickable { onItemClick(repo) },
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        CardRepo(
-            repo = repo
-        )
+        CardRepo(repo)
     }
 }
 
