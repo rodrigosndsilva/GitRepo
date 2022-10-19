@@ -36,7 +36,7 @@ fun Homescreen(
                         repo = repo,
                         onItemClick = {
                             navigator.navigate(
-                                RepoDetailsDestination(repo.owner.login, repo.name),
+                                RepoDetailsDestination(repo.owner.ownerName, repo.name),
                                 onlyIfResumed = true
                             )
                         }

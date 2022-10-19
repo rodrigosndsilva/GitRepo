@@ -29,7 +29,6 @@ class ListRepoDetails @Inject constructor(
         } catch (e: IOException) {
             emit(Resource.Error("Couldn't reach server. Check your internet connection"))
         }
-
     }
 }
 
