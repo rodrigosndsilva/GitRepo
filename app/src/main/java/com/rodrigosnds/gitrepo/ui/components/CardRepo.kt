@@ -42,7 +42,7 @@ fun CardRepo(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_user),
-                        contentDescription = null // decorative element
+                        contentDescription = "Github user icon"
                     )
                     Text(
                         text = repo.name,
@@ -59,10 +59,10 @@ fun CardRepo(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_description),
-                        contentDescription = null // decorative element
+                        contentDescription = "Description icon"
                     )
                     Text(
-                        text = repo.description?: "No Description",
+                        text = repo.description ?: "No Description",
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -76,7 +76,7 @@ fun CardRepo(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_stars),
-                        contentDescription = null // decorative element
+                        contentDescription = "Github stars icon"
                     )
                     Text(
                         text = "${repo.stargazersCount}",
