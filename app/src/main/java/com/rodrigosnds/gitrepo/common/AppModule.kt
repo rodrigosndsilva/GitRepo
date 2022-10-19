@@ -1,5 +1,7 @@
 package com.rodrigosnds.gitrepo.common
 
+import android.util.Log
+import com.rodrigosnds.gitrepo.BuildConfig
 import com.rodrigosnds.gitrepo.data.remote.GitRepoApi
 import com.rodrigosnds.gitrepo.data.repository.GitRepoRepository
 import dagger.Module
@@ -17,7 +19,7 @@ object AppModule {
     @Singleton
     fun gitRepoApi(): GitRepoApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.URL_GITHUB)
+            .baseUrl(BuildConfig.URL_GITHUB)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GitRepoApi::class.java)
