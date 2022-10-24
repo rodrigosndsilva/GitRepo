@@ -6,12 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface GitRepoApi {
+interface GitRepoService {
     @GET("search/repositories")
     suspend fun listRepos(
         @Query("q") name: String,
         @Query("sort") sort: String,
-        @Query("order") order: String
+        @Query("order") order: String,
     ): ListRepository
 
     @GET("users/{users}/repos")
@@ -20,6 +20,6 @@ interface GitRepoApi {
     @GET("/repos/{owner}/{repo}")
     suspend fun listRepoDetails(
         @Path("owner") owner: String,
-        @Path("repo") repo: String
+        @Path("repo") repo: String,
     ): Repository
 }
