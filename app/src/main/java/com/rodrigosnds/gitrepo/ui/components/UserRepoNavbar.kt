@@ -38,7 +38,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
         ) {
             OutlinedTextField(
                 modifier = Modifier
-                    .width(280.dp)
+                    .width(240.dp)
                     .height(60.dp),
                 shape = RoundedCornerShape(50),
                 value = outlinedText,
