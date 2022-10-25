@@ -1,5 +1,6 @@
 package com.rodrigosnds.gitrepo.ui.homescreen
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rodrigosnds.gitrepo.R
@@ -12,6 +13,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+const val PARAM_SORT = "stars"
+const val PARAM_ORDER = "desc"
+
 @HiltViewModel
 class HomescreenViewModel @Inject constructor(
     private val listRepos: ListRepos,
@@ -22,12 +26,37 @@ class HomescreenViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     fun getPlaceholder() =
-        if (state.value.tabState == TabState.USER) R.string.input_user_name_label else R.string.input_repo_name_label
+        if (state.value.tabState == TabState.USER) R.string.input_user_name_label
+        else R.string.input_repo_name_label
 
+    fun switchedToUserTab() {
+        if (state.value.tabState == TabState.REPO)
+            _state.update { it.copy(tabState = TabState.USER) }
+    }
 
-    fun getListRepos(name: String, sort: String, order: String) = viewModelScope.launch {
+    fun switchedToRepoTab() {
+        if (state.value.tabState == TabState.USER)
+            _state.update { it.copy(tabState = TabState.REPO) }
+    }
+
+    fun getBackgroundColorForUserBtn() =
+        if (state.value.tabState == TabState.USER)
+            Color.Blue else Color.Gray
+
+    fun getBackgroundColorForRepoBtn() =
+        if (state.value.tabState == TabState.REPO)
+            Color.Blue else Color.Gray
+
+    fun onResearch(outlinedText: String) {
+        if (state.value.tabState == TabState.USER)
+            getListUsers(outlinedText)
+        else
+            getListRepos(outlinedText.trim())
+    }
+
+    private fun getListRepos(name: String) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
-        runCatching { listRepos(name, sort, order) }
+        runCatching { listRepos(name, PARAM_SORT, PARAM_ORDER) }
             .onSuccess { repo ->
                 _state.update { it.copy(repoList = repo.repositoryList) }
             }
@@ -37,7 +66,7 @@ class HomescreenViewModel @Inject constructor(
         _state.update { it.copy(isLoading = false) }
     }
 
-    fun getListUsers(user: String)  = viewModelScope.launch {
+    private fun getListUsers(user: String) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
         runCatching { listUserRepos(user) }
             .onSuccess { repoList ->

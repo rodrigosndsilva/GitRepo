@@ -7,7 +7,7 @@ enum class TabState {
 }
 
 data class HomescreenState(
-    val tabState: TabState = TabState.USER,
+    var tabState: TabState = TabState.USER,
     val isLoading: Boolean = false,
     val repoList: List<Repository> = emptyList(),
     val error: String? = null,
