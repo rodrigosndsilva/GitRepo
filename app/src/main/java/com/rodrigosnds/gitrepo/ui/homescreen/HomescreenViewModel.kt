@@ -23,11 +23,11 @@ class HomescreenViewModel @Inject constructor(
     fun getListRepos(name: String, sort: String, order: String) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
         runCatching { listRepos(name, sort, order) }
-            .onSuccess {a->
-                _state.update { it.copy(repoList =  a.repositoryList) }
+            .onSuccess { repo ->
+                _state.update { it.copy(repoList =  repo.repositoryList) }
             }
-            .onFailure {
-                _state.update { it.copy(error = it.error) }
+            .onFailure { error ->
+                _state.update { it.copy(error = error.message) }
             }
         _state.update { it.copy(isLoading = false) }
     }
