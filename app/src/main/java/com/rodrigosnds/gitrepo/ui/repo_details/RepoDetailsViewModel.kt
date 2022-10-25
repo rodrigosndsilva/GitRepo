@@ -18,7 +18,7 @@ class RepoDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(RepositoryDetailsState())
+    private val _state = MutableStateFlow(RepoDetailsState())
     val state = _state.asStateFlow()
 
     init {
