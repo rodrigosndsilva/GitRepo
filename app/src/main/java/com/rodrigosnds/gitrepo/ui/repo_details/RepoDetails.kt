@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,7 +29,7 @@ fun RepoDetails(
     navigator: DestinationsNavigator,
     viewModel: RepoDetailsViewModel = hiltViewModel(),
 ) {
-    val state = viewModel.state.value
+    val state by viewModel.state.collectAsState()
     Column(
         modifier = Modifier
             .padding(top = 10.dp, start = 15.dp, end = 15.dp, bottom = 50.dp)
