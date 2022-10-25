@@ -37,7 +37,7 @@ class HomescreenViewModel @Inject constructor(
         _state.update { it.copy(isLoading = false) }
     }
 
-    fun getListUsers(user: String) = viewModelScope.launch {
+    fun getListUsers(user: String)  = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
         runCatching { listUserRepos(user) }
             .onSuccess { repoList ->
