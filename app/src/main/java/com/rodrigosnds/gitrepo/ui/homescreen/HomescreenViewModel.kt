@@ -17,7 +17,7 @@ class HomescreenViewModel @Inject constructor(
     private val listUserRepos: ListUserRepos,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(RepositoryListState())
+    private val _state = MutableStateFlow(HomescreenState())
     val state = _state.asStateFlow()
 
     fun getListRepos(name: String, sort: String, order: String) = viewModelScope.launch {
@@ -32,11 +32,11 @@ class HomescreenViewModel @Inject constructor(
         _state.update { it.copy(isLoading = false) }
     }
 
-    fun getListUsers(user: String) = viewModelScope.launch {
+    fun getListUsers(user: String)  = viewModelScope.launch {
         _state.update { it.copy(isLoading = true) }
         runCatching { listUserRepos(user) }
-            .onSuccess { repoList ->
-                _state.update { it.copy(repoList =  repoList) }
+            .onSuccess { repo ->
+                _state.update { it.copy(repoList =  repo) }
             }
             .onFailure { error ->
                 _state.update { it.copy(error = error.message) }
