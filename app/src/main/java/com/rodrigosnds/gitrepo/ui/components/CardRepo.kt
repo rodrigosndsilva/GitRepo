@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.R
@@ -42,7 +43,7 @@ fun CardRepo(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_user),
-                        contentDescription = "Github user icon"
+                        contentDescription = stringResource(id = R.string.content_description_user_icon)
                     )
                     Text(
                         text = repo.name,
@@ -59,10 +60,10 @@ fun CardRepo(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_description),
-                        contentDescription = "Description icon"
+                        contentDescription = stringResource(id = R.string.content_description_icon)
                     )
                     Text(
-                        text = repo.description ?: "No Description",
+                        text = repo.description ?: stringResource(id = R.string.no_description),
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -76,7 +77,7 @@ fun CardRepo(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_stars),
-                        contentDescription = "Github stars icon"
+                        contentDescription = stringResource(id = R.string.content_description_stars_icon)
                     )
                     Text(
                         text = "${repo.stargazersCount}",
