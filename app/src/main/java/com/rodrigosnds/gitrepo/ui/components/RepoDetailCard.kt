@@ -7,10 +7,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.R
@@ -42,7 +42,7 @@ fun RepoDetailCard(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_user),
-                        contentDescription = null // decorative element
+                        contentDescription = stringResource(id = R.string.content_description_user_icon)
                     )
                     Text(
                         text = repo.name,
@@ -59,10 +59,10 @@ fun RepoDetailCard(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_description),
-                        contentDescription = null // decorative element
+                        contentDescription = stringResource(id = R.string.content_description_icon)
                     )
                     Text(
-                        text = repo.description ?: "No Description",
+                        text = repo.description ?: stringResource(id = R.string.no_description),
                         style = MaterialTheme.typography.body1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(start = 5.dp)
@@ -76,7 +76,7 @@ fun RepoDetailCard(
                 {
                     Icon(
                         painter = painterResource(id = R.drawable.github_stars),
-                        contentDescription = null // decorative element
+                        contentDescription = stringResource(id = R.string.content_description_stars_icon)
                     )
                     Text(
                         text = "${repo.stargazersCount}",

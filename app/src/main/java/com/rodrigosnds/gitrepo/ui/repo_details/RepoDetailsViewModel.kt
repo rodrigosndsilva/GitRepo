@@ -1,17 +1,15 @@
 package com.rodrigosnds.gitrepo.ui.repo_details
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rodrigosnds.gitrepo.common.Resource
-import com.rodrigosnds.gitrepo.domain.model.Repository
 import com.rodrigosnds.gitrepo.domain.use_cases.ListRepoDetails
 import com.rodrigosnds.gitrepo.ui.destinations.RepoDetailsDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,30 +18,23 @@ class RepoDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(RepositoryDetailsState())
-    val state: MutableState<RepositoryDetailsState> = _state
+    private val _state = MutableStateFlow(RepoDetailsState())
+    val state = _state.asStateFlow()
 
     init {
         val navArgs: RepoDetailsNavArgs = RepoDetailsDestination.argsFrom(savedStateHandle)
         getListRepoDetails(navArgs.repoOwner, navArgs.repoName)
     }
 
-    private fun getListRepoDetails(owner: String, repo: String) {
-        listRepoDetails(owner, repo).onEach { result ->
-            when (result) {
-                is Resource.Success<Repository> -> {
-                    _state.value = RepositoryDetailsState(repoDetail = result.data)
-                }
-                is Resource.Loading<Repository> -> {
-                    _state.value = RepositoryDetailsState(isLoading = true)
-                }
-                is Resource.Error<Repository> -> {
-                    _state.value = RepositoryDetailsState(
-                        error = result.message ?: "An unexpected error occurred"
-                    )
-                }
-
+    private fun getListRepoDetails(owner: String, repo: String) = viewModelScope.launch {
+        _state.update { it.copy(isLoading = true) }
+        runCatching { listRepoDetails(owner, repo) }
+            .onSuccess { repo ->
+                _state.update { it.copy(repoDetail = repo) }
             }
-        }.launchIn(viewModelScope)
+            .onFailure { error ->
+                _state.update { it.copy(error = error.message) }
+            }
+        _state.update { it.copy(isLoading = false) }
     }
 }

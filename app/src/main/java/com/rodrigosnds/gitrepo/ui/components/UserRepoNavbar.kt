@@ -11,20 +11,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rodrigosnds.gitrepo.R
-import com.rodrigosnds.gitrepo.common.Constants
 import com.rodrigosnds.gitrepo.ui.homescreen.HomescreenViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun UserRepoNavbar(viewModel: HomescreenViewModel) {
-    val selectedUsers = remember { mutableStateOf(true) }
-    val selectedRepos = remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf("") }
-    var inputLabelText by remember { mutableStateOf(Constants.USER_NAME) }
+
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+    var outlinedText by remember { mutableStateOf("") }
 
     Column {
         Row(
@@ -40,13 +38,13 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
         ) {
             OutlinedTextField(
                 modifier = Modifier
-                    .width(280.dp)
+                    .width(240.dp)
                     .height(60.dp),
                 shape = RoundedCornerShape(50),
-                value = text,
-                label = { Text(text = inputLabelText) },
+                value = outlinedText,
+                label = { Text(text = stringResource(id = viewModel.getPlaceholder())) },
                 onValueChange = {
-                    text = it
+                    outlinedText = it
                 }
             )
             Spacer(modifier = Modifier.padding(10.dp))
@@ -55,14 +53,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                 .align(alignment = Alignment.CenterVertically),
                 shape = RoundedCornerShape(100),
                 onClick = {
-                    if (selectedUsers.value)
-                        viewModel.getListUsers(text)
-                    else
-                        viewModel.getListRepos(
-                            text.trim(),
-                            Constants.PARAM_SORT,
-                            Constants.PARAM_ORDER
-                        )
+                    viewModel.onResearch(outlinedText)
                     keyboardController?.hide()
                     focusManager.clearFocus()
                 })
@@ -87,24 +78,19 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     bottom = 12.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selectedUsers.value) Color.Blue else Color.Gray,
+                    backgroundColor = viewModel.getBackgroundColorForUserBtn(),
                     contentColor = Color.White
                 ),
-                onClick = {
-                    if (!selectedUsers.value) {
-                        selectedUsers.value = !selectedUsers.value
-                        selectedRepos.value = !selectedRepos.value
-                    }
-                    inputLabelText = Constants.USER_NAME
-                })
+                onClick = { viewModel.switchedToUserTab() })
             {
-                Text(text = Constants.BUTTON_USER_NAME)
+                Text(text = stringResource(id = R.string.btn_user_name))
             }
 
             Spacer(modifier = Modifier.padding(5.dp))
 
-            Button(modifier = Modifier
-                .weight(1.0f),
+            Button(
+                modifier = Modifier
+                    .weight(1.0f),
                 contentPadding = PaddingValues(
                     start = 20.dp,
                     top = 12.dp,
@@ -112,19 +98,13 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     bottom = 12.dp
                 ),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (selectedRepos.value) Color.Blue else Color.Gray,
-                    contentColor = Color.White
+                    backgroundColor = viewModel.getBackgroundColorForRepoBtn(),
+                    contentColor = Color.White,
                 ),
-                onClick = {
-                    if (!selectedRepos.value) {
-                        selectedRepos.value = !selectedRepos.value
-                        selectedUsers.value = !selectedUsers.value
-                    }
-                    inputLabelText = Constants.REPO_NAME
-                }) {
-                Text(text = Constants.BUTTON_REPO_NAME)
+                onClick = { viewModel.switchedToRepoTab() }
+            ) {
+                Text(text = stringResource(id = R.string.btn_repo_name))
             }
         }
     }
-
 }

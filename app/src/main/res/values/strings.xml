@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GitRepo</string>
+    <string name="input_repo_name_label">Enter a Repository name</string>
+    <string name="input_user_name_label">Enter a User name</string>
+    <string name="btn_repo_name">Repositories</string>
+    <string name="btn_user_name">Users</string>
+    <string name="no_description">No Description</string>
+    <string name="content_description_user_icon">Github user icon</string>
+    <string name="content_description_stars_icon">Github stars icon</string>
+    <string name="content_description_icon">Description icon</string>
+    <string name="list_is_empty">The result is empty</string>
 </resources>
