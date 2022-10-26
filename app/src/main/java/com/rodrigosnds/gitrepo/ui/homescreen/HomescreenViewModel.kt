@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 const val PARAM_SORT = "stars"
 const val PARAM_ORDER = "desc"
+const val LIST_IS_EMPTY = "The result is empty"
 
 @HiltViewModel
 class HomescreenViewModel @Inject constructor(
@@ -56,9 +57,12 @@ class HomescreenViewModel @Inject constructor(
 
     private fun getListRepos(name: String) = viewModelScope.launch {
         _state.update { it.copy(isLoading = true, repoList = emptyList(), error = null) }
-        runCatching { listRepos(name, PARAM_SORT, PARAM_ORDER) }
-            .onSuccess { repo ->
-                _state.update { it.copy(repoList = repo.repositoryList, error = null) }
+        runCatching { listRepos(name, PARAM_SORT, PARAM_ORDER).repositoryList }
+            .onSuccess { repositoryList ->
+                if (repositoryList.isEmpty())
+                    _state.update { it.copy(repoList = emptyList(), error = LIST_IS_EMPTY) }
+                else
+                    _state.update { it.copy(repoList = repositoryList, error = null) }
             }
             .onFailure { error ->
                 _state.update { it.copy(repoList = emptyList(), error = error.message) }
@@ -70,7 +74,12 @@ class HomescreenViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true, repoList = emptyList(), error = null) }
         runCatching { listUserRepos(user) }
             .onSuccess { repoList ->
-                _state.update { it.copy(repoList = repoList, error = null) }
+                if (repoList.isEmpty())
+                    _state.update {
+                        it.copy(repoList = emptyList(), error = LIST_IS_EMPTY)
+                    }
+                else
+                    _state.update { it.copy(repoList = repoList, error = null) }
             }
             .onFailure { error ->
                 _state.update { it.copy(repoList = emptyList(), error = error.message) }
