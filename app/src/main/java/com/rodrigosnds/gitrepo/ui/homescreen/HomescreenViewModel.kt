@@ -26,18 +26,24 @@ class HomescreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(HomescreenState())
     val state = _state.asStateFlow()
 
+    fun setState() =
+        if (state.value.tabState == TabState.USER)
+            _state.update { it.copy(tabState = TabState.REPO) }
+        else _state.update { it.copy(tabState = TabState.USER) }
+
+
     fun getPlaceholder() =
         if (state.value.tabState == TabState.USER) R.string.input_user_name_label
         else R.string.input_repo_name_label
 
     fun switchedToUserTab() {
         if (state.value.tabState == TabState.REPO)
-            _state.update { it.copy(tabState = TabState.USER) }
+            setState()
     }
 
     fun switchedToRepoTab() {
         if (state.value.tabState == TabState.USER)
-            _state.update { it.copy(tabState = TabState.REPO) }
+            setState()
     }
 
     fun getBackgroundColorForUserBtn() =
