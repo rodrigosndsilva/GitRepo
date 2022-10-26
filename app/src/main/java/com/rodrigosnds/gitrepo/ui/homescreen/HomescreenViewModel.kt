@@ -55,25 +55,25 @@ class HomescreenViewModel @Inject constructor(
     }
 
     private fun getListRepos(name: String) = viewModelScope.launch {
-        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(isLoading = true, repoList = emptyList(), error = null) }
         runCatching { listRepos(name, PARAM_SORT, PARAM_ORDER) }
             .onSuccess { repo ->
-                _state.update { it.copy(repoList = repo.repositoryList) }
+                _state.update { it.copy(repoList = repo.repositoryList, error = null) }
             }
             .onFailure { error ->
-                _state.update { it.copy(error = error.message) }
+                _state.update { it.copy(repoList = emptyList(), error = error.message) }
             }
         _state.update { it.copy(isLoading = false) }
     }
 
     private fun getListUsers(user: String) = viewModelScope.launch {
-        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(isLoading = true, repoList = emptyList(), error = null) }
         runCatching { listUserRepos(user) }
             .onSuccess { repoList ->
-                _state.update { it.copy(repoList = repoList) }
+                _state.update { it.copy(repoList = repoList, error = null) }
             }
             .onFailure { error ->
-                _state.update { it.copy(error = error.message) }
+                _state.update { it.copy(repoList = emptyList(), error = error.message) }
             }
         _state.update { it.copy(isLoading = false) }
     }
