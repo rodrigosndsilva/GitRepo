@@ -52,5 +52,8 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-      - name: Super-Linter
-        uses: github/super-linter@v4.9.7
+        run: ./gradlew lint
+      - uses: yutailang0119/action-android-lint@v3
+        with:
+          report-path: build/reports/*.xml
+        continue-on-error: true
