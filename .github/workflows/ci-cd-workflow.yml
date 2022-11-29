@@ -22,3 +22,4 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🍏 This job's status is ${{ job.status }}."
