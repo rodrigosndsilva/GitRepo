@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - releases/*
+      - CI/CD
     paths:
       - 'dist/**.js'
       - '.github/*.json'
