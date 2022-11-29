@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - CI/CD
 jobs:
   UnitTests:
     runs-on: ubuntu-latest
