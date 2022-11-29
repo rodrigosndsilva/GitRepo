@@ -52,7 +52,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-        run: ./gradlew lint
+      - run: ./gradlew lint
       - uses: yutailang0119/action-android-lint@v3
         with:
           report-path: build/reports/*.xml
