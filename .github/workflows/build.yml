@@ -52,6 +52,8 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - run: ./gradlew lint
       - uses: yutailang0119/action-android-lint@v3
         with:
