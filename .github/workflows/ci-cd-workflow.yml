@@ -1,41 +1,11 @@
-name: CI workflow
-on: push
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
-
-    # Disabled, because daveol/SampleApplication is missing
-    if: ${{ false }}
-
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: daveol/SampleApplication
-
-      - uses: actions/checkout@v3
-        with:
-          path: ./build/
-
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v3
-        with:
-          java-version: 1.8
-          distribution: 'adopt'
-
-      - name: Setup Android SDK
-        id: 'setup-android'
-        uses: ./build/
-
-      - name: Build SampleApplication
-        if: runner.os != 'windows'
-        run: ./gradlew --no-daemon build
-
-      - name: Build SampleApplication (Windows)
-        if: runner.os == 'windows'
-        run: .\gradlew.bat --no-daemon build
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out
