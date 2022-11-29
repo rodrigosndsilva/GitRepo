@@ -21,6 +21,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: reports
-
-      - name: Android Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
+        run: ./gradlew lint
+      - uses: yutailang0119/action-android-lint@v3
+        with:
+         report-path: build/reports/*.xml
+        continue-on-error: true
