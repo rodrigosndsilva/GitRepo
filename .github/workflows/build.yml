@@ -126,4 +126,4 @@ jobs:
           APP_DEBUG_LOCATION: app-debug/app-debug.apk
           ANDROID_TEST_LOCATION: app-debug-androidTest/app-debug-androidTest.apk
           DEVICE_MODEL: Pixel2,version=28,locale=pl,orientation=portrait
-        run: gcloud firebase test android run --type instrumentation --app $APP_DEBUG_LOCATION --test $ANDROID_TEST_LOCATION --device model=$DEVICE_MODEL --use-orchestrator --num-flaky-test-attempts 2
+        run: gcloud firebase test android run --type instrumentation --app $APP_DEBUG_LOCATION --test $ANDROID_TEST_LOCATION --device model=$DEVICE_MODEL
