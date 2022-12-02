@@ -87,6 +87,7 @@ jobs:
         with:
           name: app-debug-androidTest
           path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+
   firebase:
     name: Run UI tests with Firebase Test Lab
     needs: apk
@@ -102,7 +103,7 @@ jobs:
         with:
           name: app-debug-androidTest
       - name: Login to Google Cloud
-      - id: 'auth'
+        id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCLOUD_AUTH }}
