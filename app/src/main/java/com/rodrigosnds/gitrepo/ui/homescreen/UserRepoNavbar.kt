@@ -31,7 +31,7 @@ fun UserRepoNavbar(viewModel: HomescreenViewModel) {
                     start = 20.dp,
                     top = 25.dp,
                     end = 20.dp,
-                    bottom = 12.dp
+                    bottom = 12.dp,
                 )
                 .align(alignment = Alignment.CenterHorizontally)
 
