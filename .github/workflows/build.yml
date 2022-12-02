@@ -118,12 +118,5 @@ jobs:
       - name: 'Use gcloud CLI'
         run: 'gcloud auth list --filter=status:ACTIVE --format="value(account)"'
 
-      #- name: Run Instrumentation Tests in Firebase Test Lab
-      #  run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
-
       - name: Run Instrumentation Tests in Firebase Test Lab
-        env:
-          APP_DEBUG_LOCATION: app-debug/app-debug.apk
-          ANDROID_TEST_LOCATION: app-debug-androidTest/app-debug-androidTest.apk
-          DEVICE_MODEL: Pixel2,version=28,locale=pl,orientation=portrait
-        run: gcloud firebase test android run --type instrumentation --app $APP_DEBUG_LOCATION --test $ANDROID_TEST_LOCATION --device model=$DEVICE_MODEL
+        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=28,locale=pl,orientation=portrait
