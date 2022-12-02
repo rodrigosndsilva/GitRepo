@@ -102,7 +102,7 @@ jobs:
         with:
           name: app-debug-androidTest
       - name: Login to Google Cloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
         with:
           version: '270.0.0'
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
