@@ -107,6 +107,17 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCLOUD_AUTH }}
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud auth list --filter=status:ACTIVE --format="value(account)"'
+        # service-account-1@my-project.iam.gserviceaccount.com
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud auth list --filter=status:ACTIVE --format="value(account)"'
+        # service-account-2@my-project.iam.gserviceaccount.com
       - name: Set current project
         run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
       - name: Run Instrumentation Tests in Firebase Test Lab
