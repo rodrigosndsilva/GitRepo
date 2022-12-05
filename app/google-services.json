@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "367488076106",
+    "project_id": "gitrepo-mobile",
+    "storage_bucket": "gitrepo-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367488076106:android:4ac50ed8d28eab20b099b3",
+        "android_client_info": {
+          "package_name": "com.rodrigosnds.gitrepo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367488076106-5up1i5piuhqlo7ql5cntmpbjl3ag1gm8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAebLpkl7TCe2dTp_FfQJPbvvcFDxmUd7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367488076106-5up1i5piuhqlo7ql5cntmpbjl3ag1gm8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
