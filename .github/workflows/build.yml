@@ -101,9 +101,9 @@ jobs:
           path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 
   firebase:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     name: Run UI tests with Firebase Test Lab
     needs: apk
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
