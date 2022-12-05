@@ -9,8 +9,7 @@ on:
       - firebase
 jobs:
   cancelWorkflows:
-    name: cancelWorkflows
-    need: cancelWorkflows
+    name: Cancel Workflows
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Workflow Action
@@ -18,7 +17,7 @@ jobs:
 
   build:
     name: Build App
-    need: cancelWorkflows
+    needs: cancelWorkflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -40,7 +39,7 @@ jobs:
         run: ./gradlew build
   test:
     name: Run Unit Tests
-    need: cancelWorkflows
+    needs: cancelWorkflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
