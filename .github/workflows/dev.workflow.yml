@@ -11,10 +11,9 @@ jobs:
     steps:
       - name: Cancel Workflow Action
         uses: styfle/cancel-workflow-action@0.11.0
-
   test:
     name: Run Unit Tests
-    needs: cancelWorkflows
+    needs: cancel_workflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,7 +30,7 @@ jobs:
           path: app/build/reports/tests/testDebugUnitTest/index.html
   lint:
     name: Lint Check
-    needs: cancelWorkflows
+    needs: cancel_workflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -48,7 +47,7 @@ jobs:
         continue-on-error: true
   apk:
     name: Generate APK
-    needs: cancelWorkflows
+    needs: cancel_workflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
