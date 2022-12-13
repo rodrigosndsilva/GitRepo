@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
 class GitRepoApplication : Application(){
     override fun onCreate() {
         super.onCreate()
-        configCrashAndAnalyticsReport()
+        //configCrashAndAnalyticsReport()
     }
 
     private fun configCrashAndAnalyticsReport() {

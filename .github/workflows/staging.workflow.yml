@@ -1,20 +1,16 @@
-name: GitHub Actions Demo
-run-name: Testing out GitHub Actions 🚀
+name: Pull request
+run-name: Accepting pull request
 on:
   pull_request:
-  push:
     branches:
-      - main
-      - CI/CD
-      - firebase
+      - staging
 jobs:
-  cancelWorkflows:
+  cancel_workflows:
     name: Cancel Workflows
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Workflow Action
         uses: styfle/cancel-workflow-action@0.11.0
-
   build:
     name: Build App
     needs: cancelWorkflows
