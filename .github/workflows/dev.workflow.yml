@@ -79,8 +79,8 @@ jobs:
           name: app-debug
       - name: Download Android test APK
         uses: actions/download-artifact@v1
-          with:
-            name: app-debug-androidTest
+        with:
+          name: app-debug-androidTest
       - id: 'auth'
         name: Login to Google Cloud
         uses: 'google-github-actions/auth@v1'
