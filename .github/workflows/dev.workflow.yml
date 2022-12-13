@@ -46,8 +46,8 @@ jobs:
           report-path: build/reports/*.xml
         continue-on-error: true
   firebase:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     name: Run UI tests with Firebase Test Lab
+    needs: cancel_workflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
