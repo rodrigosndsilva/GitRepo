@@ -5,6 +5,12 @@ on:
     branches:
       - main
 jobs:
+  cancel_workflows:
+    name: Cancel Workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Workflow Action
+        uses: styfle/cancel-workflow-action@0.11.0
   build:
     runs-on: ubuntu-latest
     steps:
