@@ -1,9 +1,6 @@
 name: testing
 run-name: Accepting pull request
 on:
-  pull_request:
-    branches:
-      - main
 jobs:
   cancel_workflows:
     name: Cancel Workflows
@@ -11,7 +8,7 @@ jobs:
     steps:
       - name: Cancel Workflow Action
         uses: styfle/cancel-workflow-action@0.11.0
-  build:
+  instrumented_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
