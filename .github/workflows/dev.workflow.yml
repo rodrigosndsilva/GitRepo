@@ -1,0 +1,71 @@
+name: Development
+run-name: Accepting Pull Request to main
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  cancel_previous_workflows:
+    name: Cancel Previous Workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Workflow Action
+        uses: styfle/cancel-workflow-action@0.11.0
+  unit_testing:
+    name: Run Unit Tests
+    needs: cancel_previous_workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Java Version
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+      - name: Perform Unit Tests
+        run: bash ./gradlew test --stacktrace
+  lint:
+    name: Run Lint Check
+    needs: cancel_previous_workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Java Version
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+      - name: Grant Permission for Gradlew
+        run: chmod +x gradlew
+      - name: Perform Gradlew Lint
+        run: ./gradlew lint
+      - name: Lint Results
+        uses: actions/upload-artifact@v1
+        with:
+          name: lint-results
+          path: app/build/reports/lint-results-debug.html
+  instrumented_tests:
+    name: Run Intrumented Tests
+    needs: cancel_previous_workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Grant Permission for Gradlew
+        run: chmod +x gradlew
+      - name: Assemble app debug APK
+        run: ./gradlew assembleDebug
+      - name: Assemble Android Instrumentation Tests
+        run: ./gradlew assembleAndroidTest
+      - name: Login to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCLOUD_AUTH }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+      - name: Set Current Project
+        run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
+      - name: Run Instrumentation Tests in Firebase Test Lab
+        run: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
