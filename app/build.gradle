@@ -29,20 +29,21 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String", "URL_GITHUB", '"https://api.github.com/"'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
         }
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
-        debug {
-            buildConfigField "String", "URL_GITHUB", '"https://api.github.com/"'
-        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "URL_GITHUB", '"https://api.github.com/"'
+            debuggable false
+        }
+        debug {
+            debuggable true
         }
     }
     compileOptions {
@@ -63,6 +64,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    flavorDimensions
 }
 
 dependencies {
