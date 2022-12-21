@@ -31,4 +31,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.SERVICE_ACCOUNT }}
           groups: QA
-          file: app/build/outputs/apk/debug/app-debug.apk
+          file: app/build/outputs/apk/release/app-release.apk
