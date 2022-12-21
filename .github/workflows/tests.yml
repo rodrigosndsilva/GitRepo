@@ -6,4 +6,3 @@ android-pixel-4:
     - model: flame
       version: 29
       locale: 'en'
-      orientation: portrait
