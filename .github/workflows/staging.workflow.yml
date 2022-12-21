@@ -23,7 +23,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-      - name: Assemble App Debug APK
+      - name: Assemble App Release APK
         run: bash ./gradlew assembleRelease --stacktrace
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
