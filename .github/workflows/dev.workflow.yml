@@ -3,7 +3,10 @@ run-name: Accepting Pull Request to main
 on:
   pull_request:
     branches:
-      - main
+      - "*"
+    except:
+      - staging
+      - production
 jobs:
   cancel_previous_workflows:
     name: Cancel Previous Workflows
@@ -65,3 +68,4 @@ jobs:
           arg-spec: '.github/devices/tests.yml:android-pixel-3'
         env:
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+          
