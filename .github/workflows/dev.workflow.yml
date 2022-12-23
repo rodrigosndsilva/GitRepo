@@ -11,12 +11,6 @@ jobs:
     steps:
       - name: Cancel Workflow Action
         uses: styfle/cancel-workflow-action@0.11.0
-  ssh:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
   unit_testing:
     name: Run Unit Tests
     needs: cancel_previous_workflows
