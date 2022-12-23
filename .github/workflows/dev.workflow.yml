@@ -5,8 +5,8 @@ on:
     branches:
       - "*"
     except:
-      - staging
-      - production
+      - "staging"
+      - "production"
 jobs:
   cancel_previous_workflows:
     name: Cancel Previous Workflows
