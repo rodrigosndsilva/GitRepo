@@ -5,8 +5,15 @@ on:
     branches:
       - main
 jobs:
+  ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
   cancel_previous_workflows:
     name: Cancel Previous Workflows
+    needs: ssh
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Workflow Action
