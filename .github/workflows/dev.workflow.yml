@@ -3,7 +3,10 @@ run-name: Accepting Pull Request to main
 on:
   pull_request:
     branches:
-      - main
+      - "*"
+    except:
+      - staging
+      - production
 jobs:
   cancel_previous_workflows:
     name: Cancel Previous Workflows
