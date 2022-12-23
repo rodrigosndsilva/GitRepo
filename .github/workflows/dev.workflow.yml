@@ -51,10 +51,17 @@ jobs:
     needs: cancel_previous_workflows
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Grant Permission for Gradlew
+        run: chmod +x gradlew
+      - name: Assemble app debug APK
+        run: ./gradlew assembleDebug
+      - name: Assemble Android Instrumentation Tests
+        run: ./gradlew assembleAndroidTest
       - name: Run tests on Firebase Test Lab
         uses: asadmansr/Firebase-Test-Lab-Action@v1.0
         with:
-          arg-spec: 'tests.yml:android-pixel-4'
+          arg-spec: 'tests.yml:android-pixel-3'
         env:
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}

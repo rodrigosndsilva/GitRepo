@@ -1,9 +1,0 @@
-android-pixel-4:
-  type: instrumentation
-  app: app-debug.apk
-  test: app-debug-test.apk
-  device:
-    - model: shamu
-      version: 25
-      locale: 'en'
-      orientation: portrait
