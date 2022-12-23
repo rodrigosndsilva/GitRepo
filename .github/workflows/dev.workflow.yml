@@ -57,12 +57,14 @@ jobs:
     needs: cancel_previous_workflows
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Java Version
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 11
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Grant Permission for Gradlew
+        run: chmod +x gradlew
+      - name: Assemble app debug APK
+        run: ./gradlew assembleDebug
+      - name: Assemble Android Instrumentation Tests
+        run: ./gradlew assembleAndroidTest
       - name: Run tests on Firebase Test Lab
         uses: asadmansr/Firebase-Test-Lab-Action@v1.0
         with:
